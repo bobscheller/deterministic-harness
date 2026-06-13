@@ -1,6 +1,8 @@
 # Deterministic Harness Architecture
 
-A multi-layered architectural pattern for deploying autonomous AI agents in high-stakes or regulated environments — ensuring that while AI systems learn and adapt, their behavior remains predictable, controllable, and legally compliant.
+A layered architecture for running autonomous AI agents under deterministic safety constraints — a trusted, hard-coded harness that validates and bounds the output of a probabilistic model.
+
+> **Status:** An architectural proposal, not a validated system. There is no production deployment and no empirical benchmark data; any performance figures in this work are design targets, not measurements. See [Status and Validation](technical_architecture_brief.md#status-and-validation) in the brief.
 
 **[Full Technical Architecture Brief](technical_architecture_brief.md)**
 
@@ -8,7 +10,7 @@ A multi-layered architectural pattern for deploying autonomous AI agents in high
 
 ## Overview
 
-The Deterministic Harness Architecture is built on the principle of **Defense in Depth**, combining four distinct layers that work in concert to govern AI agent behavior from network isolation through to observability.
+The architecture applies **Defense in Depth** to agentic AI: four layers, each with a distinct job, working together to govern agent behavior from network isolation through to observability. The design intent is to let an agent operate with real autonomy while keeping the parts that must never drift — the safety floor — under deterministic, auditable control.
 
 ![End-to-End System Architecture](Figure-5.png)
 
@@ -19,22 +21,33 @@ The Deterministic Harness Architecture is built on the principle of **Defense in
 ### 1. Network Layer — Isolation and Sovereignty
 ![Network Layer](Figure-1.png)
 
-Isolates agentic activities using **Sovereign Shards** — TEE-backed execution environments that enforce jurisdictional data boundaries. Automated data auditing prevents raw or identifiable data from leaving the sovereign perimeter, and Federated Knowledge Synthesis allows global models to learn from regional data without raw data ever crossing a boundary.
+Isolates agentic activities using **Sovereign Shards** — TEE-backed execution environments that enforce jurisdictional data boundaries. Automated data auditing prevents raw or identifiable data from leaving the sovereign perimeter, and Federated Knowledge Synthesis lets a global model learn from regional patterns without raw data ever crossing a boundary.
 
 ### 2. Model Output Layer — Real-Time Intelligence
 ![Model Output Layer](Figure-2.png)
 
-Small Language Models (SLMs) at the edge provide low-latency decision-making, cross-validated through **Sensor Fusion** (e.g., video + ultrasound). If sensor streams disagree, the system defaults to a fail-safe state defined in the Harness. NeMo Guardrails and structured prompt engineering ensure consistent, predictable model output.
+Small Language Models (SLMs) at the edge provide low-latency decision-making, cross-validated through **Sensor Fusion** (e.g., video + ultrasound). If sensor streams disagree, the system defaults to a fail-safe state defined in the Harness. NeMo Guardrails and structured prompt engineering keep model output consistent and predictable.
 
 ### 3. Deterministic Harness — Governance as Code
 ![Deterministic Harness](Figure-3.png)
 
-A hard-coded validation layer that wraps every agentic action and enforces the rule set defined at deployment. The Harness transforms probabilistic model outputs into deterministic, auditable decisions. It intercepts policy violations, supports compliance hot-patching for regulatory changes, and logs a full decision lineage for audit.
+A hard-coded validation layer that wraps every agentic action and enforces the rule set defined at deployment. The Harness turns probabilistic model output into deterministic, auditable decisions. It intercepts policy violations before execution, supports compliance hot-patching for regulatory changes, and logs a full decision lineage for audit.
 
 ### 4. Utility Monitor — Observability and Commercial Health
 ![Utility Monitor](Figure-4.png)
 
-Wraps the entire stack with observability that goes beyond error logging. Tracks **Utility Decay** — the signal that safety constraints have become so restrictive they are blocking commercial value — and triggers a Re-Architecture Alert before the system becomes compliant but useless. Also monitors Reality Gap drift between Digital Twin simulations and production telemetry.
+Wraps the entire stack with observability that goes beyond error logging. It tracks **Utility Decay** — the signal that safety constraints have become restrictive enough to block real commercial value — and triggers a Re-Architecture Alert before the system stops earning its keep. It also monitors Reality Gap drift between the Digital Twin simulation and production telemetry.
+
+---
+
+## What This Architecture Contributes
+
+The harness-over-model pattern is not new. It descends from the [Simplex architecture](https://doi.org/10.1109/MS.2001.936213) (Sha, 2001), from run-time assurance as codified in [ASTM F3269](https://www.astm.org/f3269-21.html), and from [shielding in reinforcement learning](https://ojs.aaai.org/index.php/AAAI/article/view/11797) (Alshiekh et al., 2018). The output-validation mechanism is an instance of policy-as-code ([Open Policy Agent](https://www.openpolicyagent.org/)) and of constrained-output tooling such as [NeMo Guardrails](https://arxiv.org/abs/2310.10501).
+
+Two things set this work apart from those classical formulations:
+
+- **It bounds catastrophic failure rather than guaranteeing safety.** Classical Simplex and RTA assume a formally verified safety controller and a computable safe-recovery region. Those assumptions break down when the high-performance controller is an LLM reasoning over an open-world domain. The harness is positioned to bound failure, not prove safety, and the Failure Mode and Threat Matrices exist to make the residual coverage gaps explicit.
+- **The Utility Monitor treats over-restriction as a measured failure mode.** A supervisor so conservative it destroys the system's value is its own failure (Utility Decay). The classical safety-supervisor literature optimizes for safety alone and has no equivalent concept; instrumenting the safety-versus-value tradeoff is where this work aims to add something new.
 
 ---
 
@@ -47,3 +60,17 @@ Wraps the entire stack with observability that goes beyond error logging. Tracks
 | [Model to Harness Interface](model-to-harness-interface.md) | Interface contract between the model output layer and the deterministic harness |
 | [Failure Mode Matrix](failure-matrix.md) | 12 identified fault modes with detection thresholds and three-tier response protocols |
 | [Threat Matrix](threat-matrix.md) | 15 identified threats mapped to architectural controls, including cascading and governance risks |
+
+---
+
+## Scope
+
+This is a high-level architecture, not a tutorial or a drop-in implementation. The pattern was developed against a single cyber-physical case (CNC thermal monitoring); the layering generalizes to other high-stakes domains — autonomous vehicles, medical diagnosis, financial trading — but the physical-grounding mechanisms (Digital Twin, cross-modal sensor fusion) do not transfer for free. Each new domain must supply its own ground-truth substitute.
+
+Explicitly out of scope: training-time data security, model alignment and underlying capabilities, supply-chain security beyond the network layer, and systematic prompt-level red-teaming.
+
+---
+
+## Contributing
+
+Contributions are welcome. Open an issue for bugs or suggestions, or fork and submit a pull request. Please keep contributions aligned with the project's security and privacy principles.
