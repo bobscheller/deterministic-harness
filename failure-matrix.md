@@ -1,3 +1,7 @@
+*Status: proposed design.* This document is part of an architectural proposal that has not been implemented or deployed. The faults, severities, and fallback behaviors below are an analytical assessment of where the architecture is expected to fail — not observations from a running system. See the "Status and Validation" section of the parent Technical Brief for the canonical project status.
+
+[Parent Technical Brief](technical_architecture_brief.md)
+
 ```yaml
 # ================================================================
 # FAILURE MODE MATRIX: CNC Thermal Monitoring System
@@ -474,7 +478,7 @@ harness_layer_faults:
     description: >
       The model is updated to v2.5 which introduces a new
       action_code (ADAPTIVE_FEED_RATE) that the harness
-      rule set v3.7 does not recognize. The harness receives
+      rule set v1.7 does not recognize. The harness receives
       a schema-valid response with an action_code that
       has no matching rule, so no safety validation occurs
       for that action.

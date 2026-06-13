@@ -5,6 +5,10 @@
 
 ---
 
+*Status: proposed design.* This document is part of an architectural proposal that has not been implemented or deployed. The threats, attack scenarios, and mitigations below are an analytical (a-priori) assessment, not findings from security testing or a deployed system. See the "Status and Validation" section of the parent Technical Brief for the canonical project status.
+
+[Parent Technical Brief](technical_architecture_brief.md)
+
 ## Document Purpose
 
 This threat matrix enumerates adversarial, systemic, and emergent threats across all layers of the 3-Level AI Safety Stack as applied to the CNC thermal monitoring use case. Unlike the Failure Mode Matrix (which covers accidental faults), this document focuses on intentional attacks, architectural vulnerabilities, cascading failures, and risks that emerge from the interaction between layers. Each threat is assessed for criticality, mapped to detection mechanisms in the Utility Monitor, traced to root causes, and paired with remediation actions.

@@ -1,3 +1,7 @@
+*Status: proposed design.* This interface contract is part of an architectural proposal that has not been implemented or deployed. The schemas, the example sandbox/policy configuration, and all example payloads and field values are illustrative; any timeout, latency, throughput, resource-limit, or capacity figures are design targets, not measured results. See the "Status and Validation" section of the parent Technical Brief for the canonical project status.
+
+[Parent Technical Brief](technical_architecture_brief.md)
+
 **Sample OpenShell Deployment on Google Kubernetes Engine**
 
 ```yaml
