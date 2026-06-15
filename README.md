@@ -74,3 +74,13 @@ Explicitly out of scope: training-time data security, model alignment and underl
 ## Contributing
 
 Contributions are welcome. Open an issue for bugs or suggestions, or fork and submit a pull request. Please keep contributions aligned with the project's security and privacy principles.
+
+---
+
+## About the Author
+
+I'm Bob Scheller. I lead enablement platforms at Merck Animal Health, where I hold the founding patent on the Whisper biosensor — an ML-based animal-health monitoring system that became the SenseHub platform now operating across 30+ countries. The work in this repository is personal and independent, and does not represent my employer.
+
+This proposal comes out of a specific kind of experience: shipping a probabilistic ML system into real-world, physically-grounded deployment at scale, and watching where the gap between "the model is usually right" and "the system must never do the wrong thing" actually bites. Sensor disagreement, jurisdictional data boundaries, the slow drift between a model's training distribution and the world it runs in, and the commercial reality that a safety layer too conservative to ship is its own kind of failure — these aren't abstractions to me. The Deterministic Harness generalizes the patterns that mattered in that deployment into an architecture for agentic systems, where both the autonomy and the stakes are higher.
+
+I'm publishing it as a proposal rather than a finished system because I'd rather have the coverage gaps argued over in public than papered over.
