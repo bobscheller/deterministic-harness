@@ -79,7 +79,7 @@ Contributions are welcome. Open an issue for bugs or suggestions, or fork and su
 
 ## About the Author
 
-I'm Bob Scheller. I lead enablement platforms at Merck Animal Health, where I hold the founding patent on the Whisper biosensor — an ML-based animal-health monitoring system that became the SenseHub platform now operating across 30+ countries. The work in this repository is personal and independent, and does not represent my employer.
+I'm Bob Scheller. I lead enablement platforms at Merck Animal Health, where I am the primary inventor on the patent for the Whisper biosensor — an ML-based animal-health monitoring system. I am leading data platform and software development teams supporting commercial, manufacturing and R&D activities in 30+ countries. The work in this repository is personal and independent, and does not represent my employer.
 
 This proposal comes out of a specific kind of experience: shipping a probabilistic ML system into real-world, physically-grounded deployment at scale, and watching where the gap between "the model is usually right" and "the system must never do the wrong thing" actually bites. Sensor disagreement, jurisdictional data boundaries, the slow drift between a model's training distribution and the world it runs in, and the commercial reality that a safety layer too conservative to ship is its own kind of failure — these aren't abstractions to me. The Deterministic Harness generalizes the patterns that mattered in that deployment into an architecture for agentic systems, where both the autonomy and the stakes are higher.
 
